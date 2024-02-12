@@ -127,7 +127,7 @@ static Key keys[] = {
 	{0, XF86XK_AudioMute, spawn, {.v=mutevol}},
 
   /* Brave Browser keybinding */
-  {MODKEY,                      XK_x, spawn,          SHCMD("brave-browser")};
+  {MODKEY,                      XK_x, spawn,          SHCMD("brave-browser")},
 
   /* Poweroff */
   {MODKEY|ControlMask,                      XK_s, spawn, SHCMD("poweroff")},
