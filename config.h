@@ -123,8 +123,8 @@ static Key keys[] = {
 	{0, XF86XK_AudioRaiseVolume, spawn, {.v=upvol}},
 	{0, XF86XK_AudioMute, spawn, {.v=mutevol}},
 
-  /* Log off */
-  {MODKEY|ControlMask,                      XK_q, spawn, SHCMD("pkill dwm")},
+  /* Poweroff */
+  {MODKEY|ControlMask,                      XK_q, spawn, SHCMD("poweroff")},
 };
 
 /* button definitions */
