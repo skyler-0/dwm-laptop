@@ -63,6 +63,9 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, NULL};
 static const char *termcmd[]  = { "kitty", NULL };
+static const char *clipcmd[]  = { "clipmenu", "-i", "-fn", dmenufont, NULL}
+static const char *clipurlcmd[]  = { "clipmenu-url", NULL}
+
 
 /* screenshot */
 // static const char *screenshot = {"scrot","/home/skyler/Pictures/Screenshots/%Y-%m-%d-%T-dwm-screenshot.jpg",NULL};
@@ -125,6 +128,9 @@ static Key keys[] = {
 
   /* Poweroff */
   {MODKEY|ControlMask,                      XK_s, spawn, SHCMD("poweroff")},
+  /* Clipmenu and Clipmenu Url Keybindings */
+  {MODKEY,                        XK_v, spawn, {.v= clipcmd}}
+  {MODKEY|ShiftMask,                        XK_v, spawn, {.v= clipurlcmd}}
 };
 
 /* button definitions */
