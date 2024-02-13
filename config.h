@@ -24,6 +24,14 @@ static char *colors[][3] = {
        [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
 
+static const char *const autostart[] = {
+	"/usr/bin/picom", NULL,
+  "/home/skyler/.local/bin/newlook", NULL,
+  "/usr/local/bin/dwmblocks", NULL,
+  "/usr/bin/clipmenud", NULL,
+	NULL
+};
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
