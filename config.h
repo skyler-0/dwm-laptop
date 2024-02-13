@@ -26,9 +26,9 @@ static char *colors[][3] = {
 
 static const char *const autostart[] = {
 	"/usr/bin/picom", NULL,
-  "/home/skyler/.local/bin/newlook", NULL,
-  "/usr/local/bin/dwmblocks", NULL,
+  "dwmblocks", NULL,
   "/usr/bin/clipmenud", NULL,
+  "/home/skyler/.local/bin/newlook", NULL,
 	NULL
 };
 
