@@ -28,7 +28,8 @@ static const char *const autostart[] = {
 	"/usr/bin/picom", NULL,
   "dwmblocks", NULL,
   "/usr/bin/clipmenud", NULL,
-  "/home/skyler/.local/bin/newlook", NULL,
+  "sh", "-c", "/home/skyler/.local/bin/newlook", NULL,
+  "xdotool", "key", "super+F5", NULL,
 	NULL
 };
 
@@ -71,12 +72,14 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, NULL};
 static const char *termcmd[]  = { "kitty", NULL };
+
+/* Clipmenu -- Clipboard Manager */
 static const char *clipcmd[]  = { "clipmenu", "-i", "-fn", dmenufont, NULL};
 static const char *clipurlcmd[]  = { "clipmenu-url", NULL};
 
+/* browser command */
+static const char *browsercmd[] = { "brave-browser", NULL};
 
-/* screenshot */
-// static const char *screenshot = {"scrot","/home/skyler/Pictures/Screenshots/%Y-%m-%d-%T-dwm-screenshot.jpg",NULL};
 
 /* Volume Control */
 static const char *upvol[] = {"amixer", "sset", "Master", "5%+", NULL};
@@ -93,14 +96,14 @@ static Key keys[] = {
 	{ MODKEY,                       XK_f, 	   zoom,           {0} },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_s,      incnmaster,     {.i = +1 } },
-	{ MODKEY,		                XK_q,      killclient,     {0} },
+	{ MODKEY,		                    XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_w,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_e,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY|ShiftMask,             XK_q,  	   togglefloating, {0} },
 	{ MODKEY,                       XK_t,  	   setlayout,      {0} },
 	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
-	{ MODKEY,			            XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,			                  XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
@@ -108,9 +111,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY,			            XK_minus,  setgaps,	       {.i = -1 } },
-	{ MODKEY,			            XK_equal,  setgaps,	       {.i = +1 } },
-	{ MODKEY|ShiftMask,		        XK_equal,  setgaps,	       {.i =  0 } },
+	{ MODKEY,			                  XK_minus,  setgaps,	       {.i = -1 } },
+	{ MODKEY,			                  XK_equal,  setgaps,	       {.i = +1 } },
+	{ MODKEY|ShiftMask,		          XK_equal,  setgaps,	       {.i =  0 } },
 	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
@@ -124,24 +127,20 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,		        XK_q,     quit,           {0} },
 
   /*screenshot keybinding*/
-	{MODKEY|ShiftMask, 						XK_s, 		spawn, 			SHCMD("flameshot gui") },
+	{MODKEY|ShiftMask, 						  XK_s, 		spawn, 			SHCMD("flameshot gui") },
 
-  /* Volume Controls */
-//  {MODKEY|ControlMask,          XK_Down, spawn, {.v=downvol}},
-//  {MODKEY|ControlMask,          XK_Up, spawn, {.v=upvol}},
-//  {MODKEY|ControlMask,          XK_m, spawn, {.v=mutevol}},
 	{0, XF86XK_AudioLowerVolume, spawn, {.v=downvol}},
 	{0, XF86XK_AudioRaiseVolume, spawn, {.v=upvol}},
 	{0, XF86XK_AudioMute, spawn, {.v=mutevol}},
 
-  /* Brave Browser keybinding */
-  {MODKEY,                      XK_x, spawn,          SHCMD("brave-browser")},
+  /* Browser keybinding */
+  {MODKEY,                        XK_x,     spawn,         {.v= browsercmd}},
 
   /* Poweroff */
-  {MODKEY|ControlMask,                      XK_s, spawn, SHCMD("poweroff")},
+  {MODKEY|ControlMask,            XK_s,     spawn,         SHCMD("poweroff")},
   /* Clipmenu and Clipmenu Url Keybindings */
-  {MODKEY,                        XK_v, spawn, {.v= clipcmd}},
-  {MODKEY|ShiftMask,                        XK_v, spawn, {.v= clipurlcmd}},
+  {MODKEY,                        XK_v,     spawn,         {.v= clipcmd}},
+  {MODKEY|ShiftMask,              XK_v,     spawn,         {.v= clipurlcmd}},
 };
 
 /* button definitions */
