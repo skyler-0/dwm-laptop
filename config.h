@@ -17,19 +17,21 @@ static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
 static char selfgcolor[]            = "#eeeeee";
 static char selbordercolor[]        = "#005577";
+static const char col_urgborder[]   = "#ff0000";
 static char selbgcolor[]            = "#005577";
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
        [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+       [SchemeUrg]  = { selfgcolor, selbgcolor, col_urgborder },
 };
 
 static const char *const autostart[] = {
 	"/usr/bin/picom", NULL,
   "dwmblocks", NULL,
   "/usr/bin/clipmenud", NULL,
-  "sh", "-c", "/home/skyler/.local/bin/newlook", NULL,
-  "xdotool", "key", "super+F5", NULL,
+  "/home/skyler/.local/bin/newlook", NULL,
+//  "xrdb", "-merge", ".cache/wal/colors.Xresources", NULL,
 	NULL
 };
 
