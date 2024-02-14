@@ -19,12 +19,13 @@ static char selfgcolor[]            = "#eeeeee";
 static char selbordercolor[]        = "#005577";
 static const char col_urgborder[]   = "#ff0000";
 static char selbgcolor[]            = "#005577";
-static char *colors[][3] = {
+#include "/home/skyler/.cache/wal/colors-wal-dwm.h"
+//static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
-       [SchemeUrg]  = { selfgcolor, selbgcolor, col_urgborder },
-};
+//       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+//       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+//       [SchemeUrg]  = { selfgcolor, selbgcolor, col_urgborder },
+//};
 
 static const char *const autostart[] = {
 	"/usr/bin/picom", NULL,
