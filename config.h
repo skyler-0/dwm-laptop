@@ -139,8 +139,9 @@ static Key keys[] = {
   /* Browser keybinding */
   {MODKEY,                        XK_x,     spawn,         {.v= browsercmd}},
 
-  /* Poweroff */
-  {MODKEY|ControlMask,            XK_s,     spawn,         SHCMD("poweroff")},
+  /* Poweroff and Restart */
+  {MODKEY|ControlMask,            XK_s,     spawn,          SHCMD("poweroff")},
+  {MODKEY|ControlMask,            XK_r,     spawn,          SHCMD("reboot")},
   /* Clipmenu and Clipmenu Url Keybindings */
   {MODKEY,                        XK_v,     spawn,         {.v= clipcmd}},
   {MODKEY|ShiftMask,              XK_v,     spawn,         {.v= clipurlcmd}},
