@@ -33,6 +33,7 @@ static const char *const autostart[] = {
   "/usr/bin/clipmenud", NULL,
   "/home/skyler/.local/bin/newlook", NULL,
   "xset", "m", "0/1", "0", NULL,
+  "numlockx", NULL,
 //  "xrdb", "-merge", ".cache/wal/colors.Xresources", NULL,
 	NULL
 };
