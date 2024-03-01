@@ -35,7 +35,6 @@ static const char *const autostart[] = {
   "xset", "m", "0/1", "0", NULL,
   "numlockx", NULL,
   "xmousepasteblock", NULL,
-  "oneko", NULL,
 //  "xrdb", "-merge", ".cache/wal/colors.Xresources", NULL,
 	NULL
 };
