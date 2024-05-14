@@ -21,7 +21,7 @@ static const char col_urgborder[]   = "#ff0000";
 static char selbgcolor[]            = "#005577";
 #include "/home/skyler/.cache/wal/colors-wal-dwm.h"
 //static char *colors[][3] = {
-       /*               fg           bg           border   */
+//       /*               fg           bg           border   */
 //       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
 //       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 //       [SchemeUrg]  = { selfgcolor, selbgcolor, col_urgborder },
@@ -85,13 +85,13 @@ static const char *clipcmd[]  = { "clipmenu", "-i", "-fn", dmenufont, NULL};
 static const char *clipurlcmd[]  = { "clipmenu-url", NULL};
 
 /* browser command */
-static const char *browsercmd[] = { "brave-browser", NULL};
+static const char *browsercmd[] = { "thorium-browser", NULL};
 
 
 /* Volume Control */
-static const char *upvol[] = {"amixer", "sset", "Master", "5%+", NULL};
-static const char *downvol[] = {"amixer", "sset", "Master", "5%-", NULL};
-static const char *mutevol[] = {"amixer" , "sset", "Master", "toggle", NULL};
+static const char *upvol[] = {"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL};
+static const char *downvol[] = {"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-", NULL};
+static const char *mutevol[] = {"wpctl" , "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -144,8 +144,8 @@ static Key keys[] = {
   {MODKEY,                        XK_x,     spawn,         {.v= browsercmd}},
 
   /* Poweroff and Restart */
-  {MODKEY|ControlMask,            XK_s,     spawn,          SHCMD("poweroff")},
-  {MODKEY|ControlMask,            XK_r,     spawn,          SHCMD("reboot")},
+  {MODKEY|ControlMask,            XK_s,     spawn,          SHCMD("systemctl poweroff")},
+  {MODKEY|ControlMask,            XK_r,     spawn,          SHCMD("systemctl reboot")},
   /* Clipmenu and Clipmenu Url Keybindings */
   {MODKEY,                        XK_v,     spawn,         {.v= clipcmd}},
   {MODKEY|ShiftMask,              XK_v,     spawn,         {.v= clipurlcmd}},
