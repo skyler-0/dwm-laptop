@@ -5,13 +5,13 @@
 
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int gappx     = 5;        /* gaps between windows */
+static const unsigned int gappx     = 10;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Fira Code:size=11", "JoyPixels:pixelsize=11:antialias=true:autohint=true"};
-static const char dmenufont[]       = "Fira Code:size=11";
+static const char *fonts[]          = { "JetBrains Mono:size=11", "JoyPixels:pixelsize=11:antialias=true:autohint=true"};
+static const char dmenufont[]       = "JetBrains Mono:size=11";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -30,13 +30,15 @@ static char selbgcolor[]            = "#005577";
 static const char *const autostart[] = {
 	"/usr/bin/picom", NULL,
   "dwmblocks", NULL,
-  "/usr/bin/clipmenud", NULL,
+  "/usr/local/bin/clipmenud", NULL,
   "/home/skyler/.local/bin/newlook", NULL,
   "xset", "m", "0/1", "0", NULL,
   "numlockx", "on", NULL,
   "xmousepasteblock", NULL,
   "syncthing", NULL,
 //  "xrdb", "-merge", ".cache/wal/colors.Xresources", NULL,
+  "xinput", "--set-prop", "12", "325", "1", NULL,
+  "xinput", "--set-prop", "12", "318", "1", NULL,
 	NULL
 };
 
@@ -85,13 +87,18 @@ static const char *clipcmd[]  = { "clipmenu", "-i", "-fn", dmenufont, NULL};
 static const char *clipurlcmd[]  = { "clipmenu-url", NULL};
 
 /* browser command */
-static const char *browsercmd[] = { "thorium-browser", NULL};
+static const char *browsercmd[] = { "firefox", NULL};
 
 
 /* Volume Control */
 static const char *upvol[] = {"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL};
 static const char *downvol[] = {"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-", NULL};
 static const char *mutevol[] = {"wpctl" , "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL};
+static const char *mutemic[] = {"wpctl" , "set-mute", "@DEFAULT_AUDIO_SOURCE@", "toggle", NULL};
+
+/* Brightness Control */
+static const char *upbright[] = {"light", "-A", "5", NULL};
+static const char *downbright[] = {"light", "-U", "5", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -110,6 +117,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,  	   togglefloating, {0} },
 	{ MODKEY,                       XK_t,  	   setlayout,      {0} },
 	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
+	{0 ,                       XF86XK_Search,  spawn,          {.v = dmenucmd } },
 	{ MODKEY,	                    XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -136,9 +144,11 @@ static Key keys[] = {
   /*screenshot keybinding*/
 	{MODKEY|ShiftMask, 						  XK_s, 		spawn, 			SHCMD("flameshot gui") },
 
+	/* Volume Keybindings */
 	{0, XF86XK_AudioLowerVolume, spawn, {.v=downvol}},
 	{0, XF86XK_AudioRaiseVolume, spawn, {.v=upvol}},
 	{0, XF86XK_AudioMute, spawn, {.v=mutevol}},
+	{0, XF86XK_AudioMicMute, spawn, {.v=mutemic}},
 
   /* Browser keybinding */
   {MODKEY,                        XK_x,     spawn,         {.v= browsercmd}},
@@ -149,6 +159,14 @@ static Key keys[] = {
   /* Clipmenu and Clipmenu Url Keybindings */
   {MODKEY,                        XK_v,     spawn,         {.v= clipcmd}},
   {MODKEY|ShiftMask,              XK_v,     spawn,         {.v= clipurlcmd}},
+
+  /* Brightness Keybindings */
+  {0, XF86XK_MonBrightnessUp , spawn, {.v=upbright}},
+  {0, XF86XK_MonBrightnessDown, spawn, {.v=downbright}},
+
+  /* Suspend Keybinding */
+  {0, XF86XK_LaunchA, spawn, SHCMD("systemctl suspend")},
+
 };
 
 /* button definitions */
